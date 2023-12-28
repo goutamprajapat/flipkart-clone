@@ -11,6 +11,9 @@ const ProductSlice = createSlice({
   },
   // ! call the reducer function
   reducers: {
+    // using saga
+    getCatagoriesSaga: (state, action) => {},
+    getAllCatagoriesproductSaga: (state, action) => {},
     // save product form productlisr
     saveProducts: (state, action) => {
       state.productList = action.payload;
@@ -56,5 +59,7 @@ export const {
   addtoCart,
   removeCart,
   manageQuantity,
+  getCatagoriesSaga,
+  getAllCatagoriesproductSaga,
 } = ProductSlice.actions;
 export default ProductSlice.reducer;

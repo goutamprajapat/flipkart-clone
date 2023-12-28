@@ -1,34 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveCatagories } from "../redux/Product.slice";
-import ProductService from "../services/product.service";
+import { getCatagoriesSaga } from "../redux/Product.slice";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const { catagoires } = useSelector((state) => {
     return state.products;
   });
-  const getdata = async () => {
-    // ! call api
-    let url = "https://fakestoreapi.com/products/categories";
-    const result = await ProductService(url);
-    if (result) {
-      dispatch(saveCatagories(result));
-    }
-  };
 
   useEffect(() => {
-    if (catagoires.length === 0) getdata();
+    dispatch(getCatagoriesSaga());
+    // if (catagoires.length === 0) catagoires.length,
     // console.log("component mounted");
     return () => {
       // console.log("componets unmounted");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [catagoires.length, dispatch]);
+  }, [dispatch]);
 
   return (
     <>

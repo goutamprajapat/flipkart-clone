@@ -7,7 +7,7 @@ import Footers from "./components/Footers";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import SingleProduct from "./components/SingleProduct";
+//import SingleProduct from "./components/SingleProduct";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<AllProduct />} />
-        <Route path="/products/:id" element={<SingleProduct />} />
+        {/* <Route path="/products/:id" element={<SingleProduct />} /> */}
 
         <Route path="cart" element={<Cart />} />
 

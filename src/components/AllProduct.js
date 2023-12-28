@@ -1,7 +1,11 @@
 import { useEffect } from "react";
-import ProductService from "../services/product.service";
+//import ProductService from "../services/product.service";
 import { useDispatch, useSelector } from "react-redux";
-import { addtoCart, saveProducts } from "../redux/Product.slice";
+import {
+  addtoCart,
+  getAllCatagoriesproductSaga,
+  saveProducts,
+} from "../redux/Product.slice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AllProduct = () => {
@@ -10,25 +14,14 @@ const AllProduct = () => {
   const { productList } = useSelector((state) => state.products);
   const [getallparams] = useSearchParams();
   const categories = getallparams.get("categoriesName");
-
-  const getproduct = async () => {
-    let url = `https://fakestoreapi.com/products/category/${categories}`;
-    let url1 = `https://fakestoreapi.com/products`;
-
-    //! check length of categories
-    let URI = categories !== null ? url : url1;
-    const result = await ProductService(URI);
-    if (result) {
-      dispatch(saveProducts(result));
-    }
-  };
+  console.log(productList);
   useEffect(() => {
-    getproduct();
+    dispatch(getAllCatagoriesproductSaga(categories));
     return () => {
       dispatch(saveProducts([]));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categories, dispatch]);
+  }, []);
 
   return (
     <>
