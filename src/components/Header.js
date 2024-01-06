@@ -62,9 +62,11 @@ const Header = () => {
                     Login
                   </button>
                 </li>
-
                 <li className="nav-item">
-                  <NavLink className="nav-link " to="/products">
+                  <NavLink
+                    className="nav-link position-relative"
+                    to="/products"
+                  >
                     Products
                   </NavLink>
                 </li>

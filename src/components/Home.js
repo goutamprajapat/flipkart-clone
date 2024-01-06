@@ -12,10 +12,11 @@ function Home() {
   });
 
   useEffect(() => {
-    dispatch(getCatagoriesSaga());
-    // if (catagoires.length === 0) catagoires.length,
+    if (catagoires.length === 0) dispatch(getCatagoriesSaga());
     // console.log("component mounted");
     return () => {
+      dispatch(getCatagoriesSaga([]));
+
       // console.log("componets unmounted");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

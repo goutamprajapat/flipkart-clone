@@ -5,6 +5,7 @@ const ProductSlice = createSlice({
   name: "ProductSlice",
   // ! create inital state
   initialState: {
+    allproduct: [],
     productList: [],
     singleProduct: {},
     catagoires: [],
@@ -13,16 +14,21 @@ const ProductSlice = createSlice({
   // ! call the reducer function
   reducers: {
     // using saga
+    getAllProductSaga: (state, action) => {},
     getCatagoriesSaga: (state, action) => {},
     getAllCatagoriesproductSaga: (state, action) => {},
     getSingleProductWithIDSaga: (state, action) => {},
+
+    getAllproductlist: (state, action) => {
+      state.allproduct = action.payload;
+    },
     // save product form productlisr
     saveProducts: (state, action) => {
       state.productList = action.payload;
     },
 
     // get Single Product
-    getSingleProduct(state, action) {
+    getSingleProduct: (state, action) => {
       state.singleProduct = action.payload;
     },
     // get product catagorie wise
@@ -61,6 +67,8 @@ const ProductSlice = createSlice({
 
 // export reducer function
 export const {
+  getAllproductlist,
+  getAllProductSaga,
   saveProducts,
   saveCatagories,
   addtoCart,

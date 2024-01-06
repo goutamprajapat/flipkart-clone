@@ -1,5 +1,6 @@
 import { all } from "redux-saga/effects";
 import {
+  getAllProductWatcher,
   getProductCartListWatcher,
   getProductCartWatcher,
   getSingleProductWithIDWatcher,
@@ -10,6 +11,7 @@ export function* rootCagategorySaga() {
     getProductCartWatcher(),
     getProductCartListWatcher(),
     getSingleProductWithIDWatcher(),
+    getAllProductWatcher(),
   ];
   yield all(arr);
 }
