@@ -22,11 +22,10 @@ export function* getproductCartHandler() {
 export function* getproductSingleWithIDHandler(action) {
   try {
     let id = action.payload;
-    console.log(id);
     const data = yield call(getSingleProductWithID, id);
     yield put(getSingleProduct(data));
   } catch (error) {
-    console.log("server error");
+    console.log(error);
   }
 }
 

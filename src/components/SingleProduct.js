@@ -1,16 +1,21 @@
-import { useNavigate } from "react-router-dom";
-// import { getSingleProduct } from "../redux/Product.slice";
-// import { getproductSingleWithIDHandler } from "../redux/saga/product/product.Handler";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSingleProductWithIDSaga } from "../redux/Product.slice";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 // import ProductService from "../services/product.service";
 const SingleProduct = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   //! get id form url parameter
+  const { id } = useParams();
 
   const { singleProduct } = useSelector((state) => state.products);
-  console.log(singleProduct);
+
+  useEffect(() => {
+    dispatch(getSingleProductWithIDSaga(id));
+  }, [dispatch, id]);
 
   return (
     <>

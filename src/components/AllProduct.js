@@ -7,7 +7,6 @@ import {
   saveProducts,
 } from "../redux/Product.slice";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getproductSingleWithIDHandler } from "../redux/saga/product/product.Handler";
 
 const AllProduct = () => {
   const naviage = useNavigate();
@@ -23,7 +22,6 @@ const AllProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClick = (id) => {
-    dispatch(getproductSingleWithIDHandler(id));
     naviage(`/products/${id}`);
   };
   return (
