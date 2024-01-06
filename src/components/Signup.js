@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const [user, setUser] = useState({ username: "", email: "", password: "" });
   const navigate = useNavigate();
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    let name = e.target.name;
+    let value = e.target.value;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    window.localStorage.setItem("user", JSON.stringify(user));
+  };
+
   return (
     <>
       <div>
@@ -38,34 +54,32 @@ const Signup = () => {
                 <div className="text-center d-md-none d-sm-block">
                   <div className="fs-1 text-dark">Login</div>
                 </div>
-                <form action className="form-group px-5 p-3 m-2 mt-md-2">
+                <form className="form-group px-5 p-3 m-2 mt-md-2">
                   <input
                     type="text"
-                    name
+                    name="username"
                     className="form-control border-0 mb-5 border-2 bg-light border-dark-subtle focus-ring-danger rounded-0 border-bottom"
                     placeholder="User Name"
-                    id
+                    value={user.username}
+                    onChange={handleOnChange}
                   />
+
                   <input
                     type="text"
-                    name
-                    className="form-control border-0 mb-5 bg-light border-2 border-dark-subtle focus-ring-danger rounded-0 border-bottom"
-                    placeholder="Address"
-                    id
-                  />
-                  <input
-                    type="text"
-                    name
+                    name="email"
                     className="form-control border-0 mb-5 border-2 bg-light border-dark-subtle focus-ring-danger rounded-0 border-bottom"
                     placeholder="Email Id"
-                    id
+                    value={user.email}
+                    onChange={handleOnChange}
                   />
                   <input
-                    type="text"
-                    name
+                    type="password"
+                    name="password"
                     className="form-control border-0 mb-5 bg-light border-2 border-dark-subtle focus-ring-danger rounded-0 border-bottom"
-                    placeholder="Mobile -No"
-                    id
+                    placeholder="password"
+                    value={user.password}
+                    autoComplete="false"
+                    onChange={handleOnChange}
                   />
                   <div>
                     <p className="text-secondary">
@@ -77,7 +91,10 @@ const Signup = () => {
                     </p>
                   </div>
                   <div className="d-grid">
-                    <button className="btn bg-warning btn-lg rounded-0">
+                    <button
+                      onClick={handleSubmit}
+                      className="btn bg-warning btn-lg rounded-0"
+                    >
                       Sign Up
                     </button>
                   </div>

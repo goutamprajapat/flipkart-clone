@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // ! create a product slice form redux toolkit
+let user = JSON.parse(localStorage.getItem("islogedIn"));
 const ProductSlice = createSlice({
   name: "ProductSlice",
   // ! create inital state
@@ -10,8 +11,10 @@ const ProductSlice = createSlice({
     singleProduct: {},
     catagoires: [],
     cart: [],
+    isLogedIn: user.isLogedIn,
   },
   // ! call the reducer function
+
   reducers: {
     // using saga
     getAllProductSaga: (state, action) => {},
@@ -19,6 +22,14 @@ const ProductSlice = createSlice({
     getAllCatagoriesproductSaga: (state, action) => {},
     getSingleProductWithIDSaga: (state, action) => {},
 
+    loginUser: (state, action) => {
+      localStorage.setItem(
+        "islogedIn",
+        JSON.stringify({ isLogedIn: action.payload })
+      );
+
+      state.isLogedIn = user.isLogedIn;
+    },
     getAllproductlist: (state, action) => {
       state.allproduct = action.payload;
     },
@@ -78,5 +89,6 @@ export const {
   getSingleProduct,
   getAllCatagoriesproductSaga,
   getSingleProductWithIDSaga,
+  loginUser,
 } = ProductSlice.actions;
 export default ProductSlice.reducer;

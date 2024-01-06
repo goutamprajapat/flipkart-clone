@@ -5,7 +5,14 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const Header = () => {
   const nevigate = useNavigate();
-  const { cart } = useSelector((state) => state.products);
+
+  const { cart, isLogedIn } = useSelector((state) => state.products);
+
+  const handleClickLogOut = () => {
+    localStorage.setItem("islogedIn", JSON.stringify({ isLogedIn: false }));
+    window.location.href = "/login";
+    console.log("logout");
+  };
   return (
     <>
       <div className="container-fluid bg_blue fixed-top">
@@ -55,12 +62,21 @@ const Header = () => {
               </form>
               <ul className="navbar-nav  mb-2 mr-auto mb-lg-0 ms-3">
                 <li className="nav-item">
-                  <button
-                    className=" nav-link btn btn-sm  bg-white mt-1 text-dark p-0 p-1 px-2 rounded"
-                    onClick={() => nevigate("/login")}
-                  >
-                    Login
-                  </button>
+                  {!isLogedIn ? (
+                    <button
+                      className=" nav-link btn btn-sm  bg-white mt-1 text-dark p-0 p-1 px-2 rounded"
+                      onClick={() => nevigate("/login")}
+                    >
+                      Login
+                    </button>
+                  ) : (
+                    <button
+                      className=" nav-link btn btn-sm  bg-danger mt-1 text-dark p-0 p-1 px-2 rounded"
+                      onClick={handleClickLogOut}
+                    >
+                      Logout
+                    </button>
+                  )}
                 </li>
                 <li className="nav-item">
                   <NavLink

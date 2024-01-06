@@ -1,7 +1,35 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { loginUser } from "../redux/Product.slice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const [logUser, setLogUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const handleOnChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setLogUser({ ...logUser, [name]: value });
+  };
+
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    let user = JSON.parse(window.localStorage.getItem("user"));
+
+    console.log("object " + user.email + user.password);
+    if (user.email === logUser.email) {
+      if (user.password === logUser.password) {
+        dispatch(loginUser(true));
+        window.location.href = "/";
+      } else {
+        alert("enter valid password");
+      }
+    } else {
+      alert("invalid username or password");
+    }
+  };
+
   return (
     <>
       <div>
@@ -21,8 +49,7 @@ const Login = () => {
                 <div className="clearfix">
                   <img
                     src="https://www.fabrikaa.com/pub/static/version1695371735/frontend/Fabrika/Base/en_US/Magento_Theme/images/login_img_c4a81e.png"
-                    alt=""
-                    className
+                    alt="..."
                   />
                 </div>
               </div>
@@ -37,20 +64,23 @@ const Login = () => {
                 <div className="text-center d-md-none d-sm-block">
                   <div className="fs-1 text-dark">Login</div>
                 </div>
-                <form action className="form-group p-4 m-0 mt-md-5">
+                <form className="form-group p-4 m-0 mt-md-5">
                   <input
-                    type="text"
-                    name
+                    type="email"
+                    name="email"
                     className="form-control border-0 mb-5 border-2 bg-light border-dark-subtle focus-ring-danger rounded-0 border-bottom"
                     placeholder="User Name"
-                    id
+                    value={logUser.email}
+                    onChange={handleOnChange}
                   />
                   <input
-                    type="text"
-                    name
+                    type="password"
+                    name="password"
                     className="form-control border-0 mb-5 bg-light border-2 border-dark-subtle focus-ring-danger rounded-0 border-bottom"
                     placeholder="Password"
-                    id
+                    autoComplete="false"
+                    value={logUser.password}
+                    onChange={handleOnChange}
                   />
                   <div>
                     <p className="text-secondary">
@@ -62,7 +92,10 @@ const Login = () => {
                     </p>
                   </div>
                   <div className="d-grid">
-                    <button className="btn bg-warning btn-lg rounded-0">
+                    <button
+                      onClick={handleLogIn}
+                      className="btn bg-warning btn-lg rounded-0"
+                    >
                       Login
                     </button>
                   </div>
