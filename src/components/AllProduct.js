@@ -32,7 +32,7 @@ const AllProduct = () => {
     <>
       <div className="container-fluid container-md " style={{ marginTop: 60 }}>
         <div className="py-3">
-          <h5>products -{categories}</h5>
+          <h5>products -{categories != null ? categories : " All Products"}</h5>
         </div>
         <div className="row mb-3">
           {/* call product List to print  */}
