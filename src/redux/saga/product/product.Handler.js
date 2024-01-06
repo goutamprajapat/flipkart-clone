@@ -1,6 +1,14 @@
 import { call, put } from "redux-saga/effects";
-import { getProductService, getproductCategorie } from "./product.service";
-import { saveCatagories, saveProducts } from "../../Product.slice";
+import {
+  getProductService,
+  getSingleProductWithID,
+  getproductCategorie,
+} from "./product.service";
+import {
+  getSingleProduct,
+  saveCatagories,
+  saveProducts,
+} from "../../Product.slice";
 
 export function* getproductCartHandler() {
   try {
@@ -11,9 +19,21 @@ export function* getproductCartHandler() {
   }
 }
 
+export function* getproductSingleWithIDHandler(action) {
+  try {
+    let id = action.payload;
+    console.log(id);
+    const data = yield call(getSingleProductWithID, id);
+    yield put(getSingleProduct(data));
+  } catch (error) {
+    console.log("server error");
+  }
+}
+
 export function* getCategoireProductsHandler(action) {
   try {
     let categorie = action.payload;
+
     const data = yield call(getproductCategorie, categorie);
 
     yield put(saveProducts(data));

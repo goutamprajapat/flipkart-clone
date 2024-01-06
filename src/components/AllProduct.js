@@ -7,6 +7,7 @@ import {
   saveProducts,
 } from "../redux/Product.slice";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { getproductSingleWithIDHandler } from "../redux/saga/product/product.Handler";
 
 const AllProduct = () => {
   const naviage = useNavigate();
@@ -14,7 +15,6 @@ const AllProduct = () => {
   const { productList } = useSelector((state) => state.products);
   const [getallparams] = useSearchParams();
   const categories = getallparams.get("categoriesName");
-  console.log(productList);
   useEffect(() => {
     dispatch(getAllCatagoriesproductSaga(categories));
     return () => {
@@ -22,7 +22,10 @@ const AllProduct = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const handleClick = (id) => {
+    dispatch(getproductSingleWithIDHandler(id));
+    naviage(`/products/${id}`);
+  };
   return (
     <>
       <div className="container-fluid container-md " style={{ marginTop: 60 }}>
@@ -49,7 +52,7 @@ const AllProduct = () => {
                   </div>
                   <div className="col-4 card-body ">
                     {/* navigate to single product */}
-                    <div onClick={() => naviage(`/products/${product.id}`)}>
+                    <div onClick={() => handleClick(product.id)}>
                       <h4 className="product-style">{product.title}</h4>
                       <div className=" d-flex ">
                         <span>
