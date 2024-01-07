@@ -1,18 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCatagoriesSaga } from "../redux/Product.slice";
+import { getAllProductSaga, getCatagoriesSaga } from "../redux/Product.slice";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { catagoires } = useSelector((state) => {
+
+  const { catagoires, allproduct } = useSelector((state) => {
     return state.products;
   });
 
   useEffect(() => {
     if (catagoires.length === 0) dispatch(getCatagoriesSaga());
+    dispatch(getAllProductSaga());
     // console.log("component mounted");
     return () => {
       dispatch(getCatagoriesSaga([]));
@@ -121,121 +123,25 @@ function Home() {
         </div>
         <div className="slider mb-5" id="slider">
           <div className="slide" id="slide">
-            <div className="item text-center">
-              <img
-                src="img/productimg/product.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p2.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p3.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p4.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p5.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p6.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/product.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p2.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p3.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>{" "}
-            alt="img"
-            <div className="item text-center">
-              <img
-                src="img/productimg/p4.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p5.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
-            <div className="item text-center">
-              <img
-                src="img/productimg/p6.webp"
-                width="200px"
-                className="p-4"
-                alt="img"
-              />
-              <p>Mens Caps</p>
-            </div>
+            {allproduct.map((p, id) => {
+              return (
+                <div
+                  key={id}
+                  onClick={() => navigate(`${p.id}`)}
+                  className="item d-flex flex-column align-items-center text-center"
+                >
+                  <img src={p.image} width="200px" className="p-4" alt="img" />
+                  <p className=" text-truncate col-6">
+                    <span className="">{p.title}</span>
+                  </p>
+                </div>
+              );
+            })}
           </div>
-          <button className="ctrl-btn pro-prev">
+          <button className="ctrl-btn d-none pro-prev">
             <span className="carousel-control-prev-icon" aria-hidden="true" />
           </button>
-          <button className="ctrl-btn pro-next">
-            {" "}
+          <button className="ctrl-btn  d-none pro-next">
             <span className="carousel-control-next-icon" aria-hidden="true" />
           </button>
         </div>

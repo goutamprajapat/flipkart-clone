@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ set }) => {
   const [user, setUser] = useState({ username: "", email: "", password: "" });
   const navigate = useNavigate();
   const handleOnChange = (e) => {
@@ -30,9 +30,7 @@ const Signup = () => {
             <div className="row col-md-10 col-lg-10 col-xl-8 col-sm-10 rounded-3 shadow-lg overflow-hidden g-0 h-auto">
               <div className="bg-primary p-5 d-none d-md-flex col-sm-12 col-md-4 flex-column justify-content-between align-items-center">
                 <div>
-                  <span className="fs-5 fw-bold text-bg-primary">
-                    looks like you're new here!
-                  </span>
+                  <span className="fs-1 fw-bold text-bg-primary">Sign-Up</span>
                   <p className="fs-6 mt-4 text-light">
                     Sign up with your mobile number to get started
                   </p>
@@ -52,7 +50,7 @@ const Signup = () => {
                   X
                 </div>
                 <div className="text-center d-md-none d-sm-block">
-                  <div className="fs-1 text-dark">Login</div>
+                  <div className="fs-1 text-dark">Sign-Up</div>
                 </div>
                 <form className="form-group px-5 p-3 m-2 mt-md-2">
                   <input
@@ -101,9 +99,14 @@ const Signup = () => {
                 </form>
 
                 <div className="text-center">
-                  <NavLink to="/login" className="text-decoration-none">
-                    Existing User? Log in
-                  </NavLink>
+                  <div className="text-primary">
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={() => set(true)}
+                    >
+                      Existing User? Log in
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

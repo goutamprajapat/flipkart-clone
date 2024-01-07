@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Cookies from "js-cookie";
+import { FiLogOut } from "react-icons/fi";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -16,8 +17,8 @@ const Header = () => {
   return (
     <>
       <div className="container-fluid bg_blue fixed-top">
-        <div className="container mx-auto">
-          <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container ">
+          <nav className="navbar navbar-expand-lg navbar-light ">
             <div className="px-4 bnavbar-brand" onClick={() => nevigate("/")}>
               <img
                 src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png"
@@ -49,7 +50,7 @@ const Header = () => {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <form className="d-flex col-md-5">
+              <form className="d-flex w-75 col-md-5">
                 <input
                   className="form-control me-2"
                   type="search"
@@ -61,23 +62,6 @@ const Header = () => {
                 </button>
               </form>
               <ul className="navbar-nav  mb-2 mr-auto mb-lg-0 ms-3">
-                <li className="nav-item">
-                  {!isLogedIn ? (
-                    <button
-                      className=" nav-link btn btn-sm  bg-white mt-1 text-dark p-0 p-1 px-2 rounded"
-                      onClick={() => nevigate("/login")}
-                    >
-                      Login
-                    </button>
-                  ) : (
-                    <button
-                      className=" nav-link btn btn-sm  bg-danger mt-1 text-dark p-0 p-1 px-2 rounded"
-                      onClick={handleClickLogOut}
-                    >
-                      Logout
-                    </button>
-                  )}
-                </li>
                 <li className="nav-item">
                   <NavLink
                     className="nav-link position-relative"
@@ -101,6 +85,21 @@ const Header = () => {
                       <span className="visually-hidden">unread messages</span>
                     </span>
                   </NavLink>
+                </li>
+                <li className="nav-item">
+                  {!isLogedIn ? (
+                    <button
+                      className=" nav-link btn btn-sm  bg-white mt-1 text-dark p-0 p-1 px-2 rounded"
+                      onClick={() => nevigate("/login")}
+                    >
+                      Login
+                    </button>
+                  ) : (
+                    <FiLogOut
+                      className=" nav-link btn fs-2  bg-danger mt-1 text-white p-0 p-1 px-2 rounded"
+                      onClick={handleClickLogOut}
+                    />
+                  )}
                 </li>
               </ul>
             </div>
