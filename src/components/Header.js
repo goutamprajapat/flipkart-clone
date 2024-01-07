@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import Cookies from "js-cookie";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -9,9 +10,8 @@ const Header = () => {
   const { cart, isLogedIn } = useSelector((state) => state.products);
 
   const handleClickLogOut = () => {
-    localStorage.setItem("islogedIn", JSON.stringify({ isLogedIn: false }));
+    Cookies.remove("islogedIn");
     window.location.href = "/login";
-    console.log("logout");
   };
   return (
     <>

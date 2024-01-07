@@ -17,7 +17,6 @@ const Login = () => {
     e.preventDefault();
     let user = JSON.parse(window.localStorage.getItem("user"));
 
-    console.log("object " + user.email + user.password);
     if (user.email === logUser.email) {
       if (user.password === logUser.password) {
         dispatch(loginUser(true));

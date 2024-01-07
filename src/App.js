@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import SingleProduct from "./components/SingleProduct";
 import { useSelector } from "react-redux";
+
 const App = () => {
   const navigate = useNavigate();
   const { isLogedIn } = useSelector((state) => state.products);

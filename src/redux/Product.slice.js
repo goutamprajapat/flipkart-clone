@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 // ! create a product slice form redux toolkit
-let user = JSON.parse(localStorage.getItem("islogedIn"));
+const isLogedIn = Cookies.get("islogedIn");
+
+// let user = JSON.parse(localStorage.getItem("islogedIn"));
 const ProductSlice = createSlice({
   name: "ProductSlice",
   // ! create inital state
@@ -11,7 +14,7 @@ const ProductSlice = createSlice({
     singleProduct: {},
     catagoires: [],
     cart: [],
-    isLogedIn: user.isLogedIn,
+    isLogedIn: isLogedIn || false,
   },
   // ! call the reducer function
 
@@ -23,12 +26,11 @@ const ProductSlice = createSlice({
     getSingleProductWithIDSaga: (state, action) => {},
 
     loginUser: (state, action) => {
-      localStorage.setItem(
-        "islogedIn",
-        JSON.stringify({ isLogedIn: action.payload })
-      );
+      Cookies.set("islogedIn", action.payload, {
+        expires: 1,
+      });
 
-      state.isLogedIn = user.isLogedIn;
+      state.isLogedIn = isLogedIn;
     },
     getAllproductlist: (state, action) => {
       state.allproduct = action.payload;
