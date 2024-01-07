@@ -23,12 +23,19 @@ const App = () => {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<AllProduct />} />
-        <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+        {isLogedIn === false ? (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </>
+        ) : (
+          <>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/products" element={<AllProduct />} />
+            <Route path="/products/:id" element={<SingleProduct />} />
+            <Route path="cart" element={<Cart />} />
+          </>
+        )}
       </Routes>
       <Footers />
     </div>
