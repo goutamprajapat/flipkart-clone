@@ -14,14 +14,14 @@ const App = () => {
   const navigate = useNavigate();
   const { isLogedIn } = useSelector((state) => state.products);
   useEffect(() => {
-    if (isLogedIn === null) {
+    if (isLogedIn === false) {
       navigate("/login");
     }
   }, [isLogedIn, navigate]);
 
   return (
     <div>
-      <Header />
+      {isLogedIn && <Header />}
       <Routes>
         {isLogedIn === false ? (
           <>
@@ -29,7 +29,7 @@ const App = () => {
           </>
         ) : (
           <>
-            <Route path="/" element={<Home />} />
+            <Route exact path="/" element={<Home />} />
             <Route path="/products" element={<AllProduct />} />
             <Route path="/products/:id" element={<SingleProduct />} />
             <Route path="/:id" element={<SingleProduct />} />
@@ -41,7 +41,7 @@ const App = () => {
           </>
         )}
       </Routes>
-      <Footers />
+      {isLogedIn && <Footers />}
     </div>
   );
 };

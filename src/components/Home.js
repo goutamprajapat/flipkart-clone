@@ -12,6 +12,23 @@ function Home() {
     return state.products;
   });
 
+  let catag = [
+    { name: "electronics", image: "img/category/Electronics.webp" },
+    {
+      name: "jewelery",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTALfIwwO1TlR1vJRzeqh78bq4lQdtdN7qg_g&usqp=CAU",
+    },
+    {
+      name: "men's clothing",
+      image:
+        "https://image.similarpng.com/very-thumbnail/2020/12/Business-men-clothing-suit-on-transparent-PNG.png",
+    },
+    {
+      name: "women's clothing",
+      image: "img/category/Fashion.webp",
+    },
+  ];
   useEffect(() => {
     if (catagoires.length === 0) dispatch(getCatagoriesSaga());
     dispatch(getAllProductSaga());
@@ -30,7 +47,7 @@ function Home() {
         <div className="container-fluid categories" style={{ marginTop: 60 }}>
           <div className="container">
             <div className="d-flex justify-content-between catemobile">
-              {catagoires.map((catagories, index) => {
+              {catag.map((catagories, index) => {
                 return (
                   <div
                     className="items text-center"
@@ -39,18 +56,14 @@ function Home() {
                       navigate(
                         `/products/?categoriesIndex=${
                           index + 1
-                        }&categoriesName=${catagories}`
+                        }&categoriesName=${catagories.name}`
                       )
                     }
                   >
                     <div className="catimg">
-                      <img
-                        width="64px"
-                        src="img/category/offers.webp"
-                        alt="img"
-                      />
+                      <img width="64px" src={catagories.image} alt="img" />
                     </div>
-                    <div className="catname">{catagories}</div>
+                    <div className="catname">{catagories.name}</div>
                   </div>
                 );
               })}
